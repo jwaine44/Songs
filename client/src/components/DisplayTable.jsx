@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import DeleteButton from './DeleteButton';
 
 // 1. grab information on load, so need Axios and useEffect
 // 2. need to store info with useState
@@ -8,14 +9,14 @@ import {Link} from 'react-router-dom';
 const DisplayTable = (props) => {
     // all songs will be an array of objects that looks like [{title: name of song}, {}, {}]
 
-    const handleDelete = (deleteId) => {
-        // When we click the button, we want to:
-        // 1. delete the item from the database
-        // 2. update the list at the parent
-        axios.delete(`http://localhost:8000/api/songs/${deleteId}`)
-            .then(res => props.updateList(deleteId))
-            .catch(err => console.log(err))
-    }
+    // const handleDelete = (deleteId) => {
+    //     // When we click the button, we want to:
+    //     // 1. delete the item from the database
+    //     // 2. update the list at the parent
+    //     axios.delete(`http://localhost:8000/api/songs/${deleteId}`)
+    //         .then(res => props.updateList(deleteId))
+    //         .catch(err => console.log(err))
+    // }
 
     return (
         <fieldset>
@@ -37,7 +38,7 @@ const DisplayTable = (props) => {
                                     <td>{song.artist}</td>
                                     <td>{song.rating}</td>
                                     <td><Link to = {`/songs/${song._id}/edit`}>Edit</Link></td>
-                                    <td><button onClick = {()=> {handleDelete(song._id)}}>Delete</button></td>
+                                    <td><DeleteButton deleteId = {song._id} onDelete = {props.updateList}/></td>
                                 </tr>
                             )
                         })

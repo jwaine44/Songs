@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import DeleteButton from '../components/DeleteButton';
 
 // 1. Need to get the id from params (useParams)
 // 2. Need to display information on load so need useEffect
@@ -18,10 +19,8 @@ const Details = () => {
             .catch(err => console.log(err))
     }, [])
 
-    const handleDelete = () => {
-        axios.delete(`http://localhost:8000/api/songs/${id}`)
-            .then(res => navigate('/'))
-            .catch(err => console.log(err))
+    const redirectToMain = () => {
+        navigate('/')
     }
 
   return (
@@ -33,7 +32,7 @@ const Details = () => {
                 <h5>Title: {song.title}</h5>
                 <h5>Artist: {song.artist}</h5>
                 <h5>Rating: {song.rating}</h5>
-                <button onClick = {handleDelete}>Delete</button>
+                <DeleteButton deleteId = {id} onDelete = {redirectToMain} />
             </div>:
             <h5>The song is not available</h5>
         }

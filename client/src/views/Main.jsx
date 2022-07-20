@@ -23,7 +23,7 @@ const Main = () => {
     <fieldset>
         <legend>Main.jsx</legend>
         <CreateFormUpdate updateList = {refreshList} />
-        <DisplayTable songList = {songList} />
+        <DisplayTable songList = {songList} updateList = {refreshList} />
     </fieldset>
   )
 }
